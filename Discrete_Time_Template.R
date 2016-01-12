@@ -21,6 +21,9 @@ getwd()
 # 2. Input data, set parameter values, and/or set initial conditions.
 # ___________
 
+## Set number of timesteps
+nsteps = 100
+
 ## Initialize a matrix in which to store your outputs. I like to store each state variable on a different row and each each timestep on a different column. Before you run the analysis, all the entries in your matrix sould have value 0 (or, I like to use NA)
 
 #   Here, we have one state variable, so we use one row
@@ -32,8 +35,7 @@ N0 = 5
 #   Store the initial conditions in the first column, appropriate row, of your output matrix
 NN[1, 1] <- N0
 
-## Set number of timesteps
-nsteps = 100
+
 
 
 ## Set your parameters
