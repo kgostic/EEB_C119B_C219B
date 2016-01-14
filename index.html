@@ -85,6 +85,14 @@ Now, take a moment to work through a script that uses a for loop to solve the di
 Finally, work through this script, which uses an ODE solver, to solve the continuous time logistic model. <a href="https://raw.githubusercontent.com/kgostic/EEB_C119B_C219B/gh-pages/Continuous_Time_Template.R">R template for continuous-time models with ODE solver.</a>  </p> 
 </li>
 
+<h3>
+<a id="solving-discrete-or-continuous-time-models" class="anchor" href="#solving-discrete-or-continuous-time-models" aria-hidden="true"><span class="octicon octicon-link"></span></a>Discrete SIR Examples</h3>
+<p> Here are two working example scripts for the discrete time SIR model. If you didn't have your scripts working by the end of discussion last week, you can check your work against these. </p>
+
+<li> <a href="https://raw.githubusercontent.com/kgostic/EEB_C119B_C219B/gh-pages/Discrete_SIR_Example1.R">Example 1</a> uses a single matrix to store and plot the three state variables. </li>
+<li> <a href="https://raw.githubusercontent.com/kgostic/EEB_C119B_C219B/gh-pages/Discrete_SIR_Example2.R">Example 2</a> uses three vectors (SS, II, and RR) to store and plot the three state variables. </li>
+<li>These scripts contain parameter values and initial populaiton sizes that return sensible results. A few of you noticed in class that different parameters and initial conditions could make your numbers of susceptibles go past 0 and into the negative range. This obviously doesn't make biological sense. Discrete time models are widely known to return this sort of odd behavior, which we wouldn't see in the analagous continuous time model. See this <a href="https://www.youtube.com/watch?v=bfMjdvQoUYA">3-minute video</a> if you're interested in understanding how complex dynamics like oscillations and chaos can arise in the discrete-time logistic model.<\li>
+
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/kgostic/EEB_C119B_C219B">EEB C119B C219B</a> is maintained by <a href="https://github.com/kgostic">kgostic</a>.</span>
