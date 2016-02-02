@@ -26,17 +26,24 @@ require('deSolve')
 # 2. Input data, set parameter values, and/or set state_varsial conditions.
 # ___________
 #state_varsial population size
-state_vars = c(NN = 1)
+
+## ------------  IMPORTANT !!
+## Express your state variables as fractions of the whole population, so S+I+R = 1
+## ------------
+S0 = .1
+I0 = .0001
+R0 = 1-S0-I0
+state_vars = c(SS = S0, II = I0, RR = R0)
 
 #Generate a  series of times at which you want the ODE solver to output population sizes
-tseq <- seq(0, 20, by = .2)
+tseq <- seq(0, 20000, by = 1)
 #Run the line below to see your time sequence
 tseq
 
 #Generate a vector of parameter values. This syntax gives the appropriate name to each entry in the vector, so you don't have to remember which parameter comes first, second and third later.
-pars <- c(rr = 0.9, kk = 100, hh = 0)
+pars <- c(beta = 1.4247, gamma = 0.14, mu = 0.0000391)
 #See what the variable looks like
-pars
+pars; names(pars) = NULL
 
 
 
@@ -52,11 +59,20 @@ pars
 
 
 #pars will be a generic term for parameters
-logGrowthODE <- function(state_vars, tseq, pars){
-  #the pars syntax below requires us to define pars as pars <- c(rr = ##)
-  dN_dt <- pars['rr']*state_vars[1]*(1-state_vars[1]/pars['kk'])  #This stores the output of dN/dt = rN to a vector called derivs
+SIR_system <- function(tseq, state_vars, pars){
+  SS = state_vars[1]
+  II = state_vars[2]
+  RR = state_vars[3]
+  
+  beta = pars[1]
+  gamma = pars[2]
+  mu = pars[3]
+  
+  dS_dt = mu - beta*state_vars[1]*state_vars[2] - mu*state_vars[1]
+  dI_dt = beta*state_vars[1]*state_vars[2] - gamma*state_vars[2] - mu*state_vars[2]
+  dR_dt = gamma*state_vars[2] - mu*state_vars[3]
   #Hint - with one state variable, we call state_vars[1] to get the first and only entry, which represents NN
-  return(list(dN_dt))
+  list(c(dS = dS_dt, dI = dI_dt, dR = dR_dt))
 }
 
 
@@ -66,9 +82,15 @@ logGrowthODE <- function(state_vars, tseq, pars){
 # ___________
 
 #Now call the function to the ODE solver. Store the results to a variable called "output"
-output <- lsoda(state_vars, tseq, logGrowthODE, pars)
+output <- lsoda(c(S0, I0, R0), tseq, SIR_system, pars)
+
+# Look at the format of the results
+head(output) #The first column is time, "1" is your first state variable (S), "2" is I, and "3" is R
 
 #Plot the output
-plot(output[,1], output[,2], col = "blue", type = "l", xlab="time", ylab="N", 
-     main = "ODE Logistic Growth")
+par(mfrow = c(2,2))
+plot(output[,1], output[,2], col = "blue", type = "l", xlab="time", ylab="N",  main = "S") #Plot column 1 (time), against column 2 (S)
+plot(output[,1], output[,3], col = 'red', main = 'I', type = 'l') #Plot column 1 (time), against column 3 (I)
+plot(output[,1], output[,4], main = 'R', type = 'l') #Plot column 1 (time), against column 4 (R)
+
 
