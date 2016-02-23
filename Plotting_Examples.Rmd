@@ -1,0 +1,116 @@
+---
+title: "Plotting examples in R base graphics and ggplot"
+author: "Katie Gostic"
+date: "February 23, 2016"
+output: html_document
+---
+
+```{r, echo = FALSE}
+require(knitr)
+```
+
+### Load packages and data
+
+```{r}
+#Load the ggplot package
+library(ggplot2)
+
+data(mpg) #Load built-in data set, mpg
+?cars #Inspect your data set and get to know the variables
+head(mpg)
+
+
+```
+
+### Section 1. Examples in R base graphics using the mpg dataset
+
+```{r}
+
+attach(mpg) #Attach the data frame so you can call columns by name
+              # e.g., other wise you would need to type mpg$hwy instead of just hwy
+
+
+plot(cty, hwy, xlab = 'Highway Mileage', ylab = 'City Mileage', main = 'MPG Plot')
+
+# Jitter the points so they don't all overlap
+plot(jitter(cty), jitter(hwy), xlab = 'Highway Mileage', ylab = 'City Mileage', main = 'MPG Plot')
+
+#Change the color
+plot(jitter(cty), jitter(hwy), xlab = 'Highway Mileage', ylab = 'City Mileage', main = 'MPG Plot', col = 'steelblue2')
+
+#Change the point type
+plot(jitter(cty), jitter(hwy), xlab = 'Highway Mileage', ylab = 'City Mileage', main = 'MPG Plot', col = 'steelblue2', pch = 19)
+# See ?points for a list of point characters
+
+#Change the point size
+plot(jitter(cty), jitter(hwy), xlab = 'Highway Mileage', ylab = 'City Mileage', main = 'MPG Plot', col = 'steelblue2', pch = 19, cex = 2)
+
+# Change the text size of the title, axis labels (words) and axis ticks (numbers on tick marks)
+#Change the point type
+plot(jitter(cty), jitter(hwy), xlab = 'Highway Mileage', ylab = 'City Mileage', main = 'MPG Plot', col = 'steelblue2', pch = 19, cex.main = 2) #title size
+
+plot(jitter(cty), jitter(hwy), xlab = 'Highway Mileage', ylab = 'City Mileage', main = 'MPG Plot', col = 'steelblue2', pch = 19, cex.lab = 2) #Axis label
+
+plot(jitter(cty), jitter(hwy), xlab = 'Highway Mileage', ylab = 'City Mileage', main = 'MPG Plot', col = 'steelblue2', pch = 19, cex.axis = 2) #Axis tick
+
+
+# Keep your memory clear of clutter by detaching data frames when you are done plotting
+detach(mpg)
+
+
+# Plot Audi and Chevrolet data in different colors
+
+#First, take subsets of the full data set
+Audi = subset(mpg, subset = manufacturer == 'audi')
+Chevrolet = subset(mpg, subset = manufacturer == 'chevrolet')
+
+#Start by plotting the Audi data
+plot(jitter(Audi$cty), jitter(Audi$hwy), xlab = 'Highway Mileage', ylab = 'City Mileage', main = 'MPG Plot', col = 'steelblue2', pch = 19)
+
+#Overlay the chevy plot using "points" or "lines"
+points(jitter(Chevrolet$cty), jitter(Chevrolet$hwy), pch = 19, col = 'magenta')
+
+#Add a legend in the top left
+legend('topleft', legend =  c('Audi', 'Chevrolet'), fill = c('steelblue2', 'magenta'))
+?legend
+
+```
+
+### Section 2. The same examples, plotted using ggplot2
+##### NOTE: you MUST put your data into a data frame to use ggplot2
+
+```{r}
+# Make a basic plot
+p = ggplot(mpg, aes(x = cty, y = hwy))
+```
+
+In ggplot syntax, you start with the name of your data frame, here mpg, and use the aesthetics option to tell it which columns to use on the x and y axis. Save these instructions to variable p. Then plot the basic plot layer, p below, using the + sign to add new plot layers (below layers include plot geometry, titles, etc.)
+
+```{r}
+p + geom_point() #Show plot with basic geometry
+
+p + geom_point(color = 'steelblue2') #Add color
+
+p + geom_jitter(color = 'steelblue2') #Add jitter
+
+p + geom_jitter(color = 'steelblue2', size = 3) #Change point size
+
+p + geom_jitter(color = 'steelblue2', size = 3) + ggtitle('MPG plot') #Add title
+
+p + geom_jitter(color = 'steelblue2', size = 3) + ggtitle('MPG plot') + 
+  theme(axis.title = element_text(size=22)) +                               #Change axis label size
+  theme(plot.title = element_text(size=22))                                 #Change plot title size
+
+p + geom_jitter(aes(color = model)) # Determine point color based on the values in the "model" column
+
+p + geom_jitter(aes(color = manufacturer)) # Determine point color based on the values in the "manufacturer" column
+
+p + geom_jitter(color = 'steelblue2') + geom_smooth(method = lm) # Add a regression line with confidence intervals automatically plotted
+
+p + geom_jitter(color = 'steelblue2') + geom_smooth(method = lm, se = FALSE) # Add a regression line without confidence intervals
+# Note, you use similar modifications to change the point size
+
+## See the ggplot documentation for help, or Google for example scripts that make the plots you want
+```
+
+This page was made using R Markdown with package knitr.
