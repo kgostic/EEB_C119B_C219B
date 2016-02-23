@@ -84,28 +84,4 @@ p + geom_jitter(aes(color = model)) #Color according to model
 
 p + geom_jitter(aes(color = manufacture)) #Color according to make
 
-
-
-# Jitter the points so they don't all overlap
-plot(jitter(cty), jitter(hwy), xlab = 'Highway Mileage', ylab = 'City Mileage', main = 'MPG Plot')
-
-#Change the color
-plot(jitter(cty), jitter(hwy), xlab = 'Highway Mileage', ylab = 'City Mileage', main = 'MPG Plot', col = 'steelblue2')
-
-#Change the point type
-plot(jitter(cty), jitter(hwy), xlab = 'Highway Mileage', ylab = 'City Mileage', main = 'MPG Plot', col = 'steelblue2', pch = 19)
-# See ?points for a list of point characters
-
-#Change the point size
-plot(jitter(cty), jitter(hwy), xlab = 'Highway Mileage', ylab = 'City Mileage', main = 'MPG Plot', col = 'steelblue2', pch = 19, cex = 2)
-
-# Change the text size of the title, axis labels (words) and axis ticks (numbers on tick marks)
-#Change the point type
-plot(jitter(cty), jitter(hwy), xlab = 'Highway Mileage', ylab = 'City Mileage', main = 'MPG Plot', col = 'steelblue2', pch = 19, cex.main = 2) #title size
-
-plot(jitter(cty), jitter(hwy), xlab = 'Highway Mileage', ylab = 'City Mileage', main = 'MPG Plot', col = 'steelblue2', pch = 19, cex.lab = 2) #Axis label
-
-plot(jitter(cty), jitter(hwy), xlab = 'Highway Mileage', ylab = 'City Mileage', main = 'MPG Plot', col = 'steelblue2', pch = 19, cex.axis = 2) #Axis tick
-
-detach(mpg)
-
+## See the ggplot documentation for help, or Google for example scripts that make the plots you want
