@@ -2,7 +2,7 @@
 title: "Plotting examples in R base graphics and ggplot"
 author: "Katie Gostic"
 date: "February 23, 2016"
-output: html_document
+output: pdf_document
 ---
 
 ```{r, echo = FALSE}
@@ -33,28 +33,36 @@ attach(mpg) #Attach the data frame so you can call columns by name
 plot(cty, hwy, xlab = 'Highway Mileage', ylab = 'City Mileage', main = 'MPG Plot')
 
 # Jitter the points so they don't all overlap
-plot(jitter(cty), jitter(hwy), xlab = 'Highway Mileage', ylab = 'City Mileage', main = 'MPG Plot')
+plot(jitter(cty), jitter(hwy), xlab = 'Highway Mileage', ylab = 'City Mileage', 
+     main = 'MPG Plot')
 
 #Change the color
-plot(jitter(cty), jitter(hwy), xlab = 'Highway Mileage', ylab = 'City Mileage', main = 'MPG Plot', col = 'steelblue2')
+plot(jitter(cty), jitter(hwy), xlab = 'Highway Mileage', ylab = 'City Mileage', 
+     main = 'MPG Plot', col = 'steelblue2')
 
 #Change the point type
-plot(jitter(cty), jitter(hwy), xlab = 'Highway Mileage', ylab = 'City Mileage', main = 'MPG Plot', col = 'steelblue2', pch = 19)
+plot(jitter(cty), jitter(hwy), xlab = 'Highway Mileage', ylab = 'City Mileage',
+     main = 'MPG Plot', col = 'steelblue2', pch = 19)
 # See ?points for a list of point characters
 
 #Change the point size
-plot(jitter(cty), jitter(hwy), xlab = 'Highway Mileage', ylab = 'City Mileage', main = 'MPG Plot', col = 'steelblue2', pch = 19, cex = 2)
+plot(jitter(cty), jitter(hwy), xlab = 'Highway Mileage', ylab = 'City Mileage', 
+     main = 'MPG Plot', col = 'steelblue2', pch = 19, cex = 2)
 
 # Change the text size of the title, axis labels (words) and axis ticks (numbers on tick marks)
 #Change the point type
-plot(jitter(cty), jitter(hwy), xlab = 'Highway Mileage', ylab = 'City Mileage', main = 'MPG Plot', col = 'steelblue2', pch = 19, cex.main = 2) #title size
+plot(jitter(cty), jitter(hwy), xlab = 'Highway Mileage', ylab = 'City Mileage', 
+     main = 'MPG Plot', col = 'steelblue2', pch = 19, cex.main = 2) #title size
 
-plot(jitter(cty), jitter(hwy), xlab = 'Highway Mileage', ylab = 'City Mileage', main = 'MPG Plot', col = 'steelblue2', pch = 19, cex.lab = 2) #Axis label
+plot(jitter(cty), jitter(hwy), xlab = 'Highway Mileage', ylab = 'City Mileage', 
+     main = 'MPG Plot', col = 'steelblue2', pch = 19, cex.lab = 2) #Axis label
 
-plot(jitter(cty), jitter(hwy), xlab = 'Highway Mileage', ylab = 'City Mileage', main = 'MPG Plot', col = 'steelblue2', pch = 19, cex.axis = 2) #Axis tick
+plot(jitter(cty), jitter(hwy), xlab = 'Highway Mileage', ylab = 'City Mileage', 
+     main = 'MPG Plot', col = 'steelblue2', pch = 19, cex.axis = 2) #Axis tick
 
 
-# Keep your memory clear of clutter by detaching data frames when you are done plotting
+# Keep your memory clear of clutter by detaching data frames when 
+#you are done plotting
 detach(mpg)
 
 
@@ -98,19 +106,26 @@ p + geom_jitter(color = 'steelblue2', size = 3) #Change point size
 p + geom_jitter(color = 'steelblue2', size = 3) + ggtitle('MPG plot') #Add title
 
 p + geom_jitter(color = 'steelblue2', size = 3) + ggtitle('MPG plot') + 
-  theme(axis.title = element_text(size=22)) +                               #Change axis label size
-  theme(plot.title = element_text(size=22))                                 #Change plot title size
+  theme(axis.title = element_text(size=22)) +                              
+  #Change axis label size
+  theme(plot.title = element_text(size=22))                                 
+#Change plot title size
 
-p + geom_jitter(aes(color = model)) # Determine point color based on the values in the "model" column
+p + geom_jitter(aes(color = model)) # Determine point color based on 
+#the values in the "model" column
 
-p + geom_jitter(aes(color = manufacturer)) # Determine point color based on the values in the "manufacturer" column
+p + geom_jitter(aes(color = manufacturer)) # Determine point color based 
+#on the values in the "manufacturer" column
 
-p + geom_jitter(color = 'steelblue2') + geom_smooth(method = lm) # Add a regression line with confidence intervals automatically plotted
+p + geom_jitter(color = 'steelblue2') + geom_smooth(method = lm) # Add a 
+#regression line with confidence intervals automatically plotted
 
-p + geom_jitter(color = 'steelblue2') + geom_smooth(method = lm, se = FALSE) # Add a regression line without confidence intervals
+p + geom_jitter(color = 'steelblue2') + geom_smooth(method = lm, se = FALSE) 
+# Add a regression line without confidence intervals
 # Note, you use similar modifications to change the point size
 
-## See the ggplot documentation for help, or Google for example scripts that make the plots you want
+## See the ggplot documentation for help, or Google for example 
+#scripts that make the plots you want
 ```
 
 This page was made using R Markdown with package knitr.
