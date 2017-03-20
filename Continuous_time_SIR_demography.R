@@ -36,12 +36,12 @@ R0 = 0
 state_vars = c(SS = S0, II = I0, RR = R0)
 
 #Generate a  series of times at which you want the ODE solver to output population sizes
-tseq <- seq(0, 20000, by = 1)
+tseq <- seq(0, 500, by = 1)
 #Run the line below to see your time sequence
 tseq
 
 #Generate a vector of parameter values. This syntax gives the appropriate name to each entry in the vector, so you don't have to remember which parameter comes first, second and third later.
-pars <- c(beta = 1.4247, gamma = 0.14, mu = 0.0000391)
+pars <- c(beta = 0.5, gamma = 0.4, mu = 0.0007)
 #See what the variable looks like
 pars; names(pars) = NULL
 
@@ -68,9 +68,9 @@ SIR_system <- function(tseq, state_vars, pars){
   gamma = pars[2]
   mu = pars[3]
   
-  dS_dt = mu - beta*state_vars[1]*state_vars[2] - mu*state_vars[1]
-  dI_dt = beta*state_vars[1]*state_vars[2] - gamma*state_vars[2] - mu*state_vars[2]
-  dR_dt = gamma*state_vars[2] - mu*state_vars[3]
+  dS_dt = mu-beta*state_vars[1]*state_vars[2]-mu*state_vars[1]
+  dI_dt = beta*state_vars[1]*state_vars[2] - gamma*state_vars[2]-mu*state_vars[2]
+  dR_dt = gamma*state_vars[2]-mu*state_vars[3]
   #Hint - with one state variable, we call state_vars[1] to get the first and only entry, which represents NN
   list(c(dS = dS_dt, dI = dI_dt, dR = dR_dt))
 }

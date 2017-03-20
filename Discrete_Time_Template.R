@@ -102,10 +102,10 @@ LogGrowth <- function(N0, RR, KK, nsteps){
   return(NN)
 }
 
-## CALL THE FUNCTION, but don't save the output
+## CALL THE FUNCTION and print the outputs to your console
 LogGrowth(N0 = 5, RR = 1.2, KK = 50, nsteps = 100)
 
-## CALL THE FUNCTION, and save the output to a new vector, NN_2
+## CALL THE FUNCTION, and store the output to a new vector, NN_2
 NN_2 = LogGrowth(N0 = 5, RR = 1.2, KK = 50, nsteps = 100)
 
 ## Plot
